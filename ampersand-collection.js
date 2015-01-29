@@ -38,10 +38,10 @@ extend(Collection.prototype, BackboneEvents, {
     },
 
     // overridable serialize method
-    serialize: function () {
+    serialize: function (options) {
         return this.map(function (model) {
             if (model.serialize) {
-                return model.serialize();
+                return model.serialize(options);
             } else {
                 var out = {};
                 extend(out, model);
@@ -51,8 +51,8 @@ extend(Collection.prototype, BackboneEvents, {
         });
     },
 
-    toJSON: function () {
-        return this.serialize();
+    toJSON: function (options) {
+        return this.serialize(options);
     },
 
     set: function (models, options) {
